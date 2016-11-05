@@ -103,13 +103,14 @@ function isGameOver(){
 		//triggers walker audio
 		$("#walkerGrowl").trigger('play');
 		gameOver = true;
-		alert("You didn't save " + myWord.toUpperCase() + " from the walkers!");
-		var playAgain = confirm("Do you want to play again?");
+		alert("Oh no! You didn't save " + myWord.toUpperCase() + " from the walkers!");
+		var playAgain = confirm("Do you want to play again? Hit 'OK' to play again, or 'Cancel' to exit the game.");
 		if (playAgain){
 			reset();
 		} else{
-			//if user doesn't want to play again, this triggers lizzie's freakout audio
+			//if user doesn't want to play again, this triggers lizzie's freakout audio and will close the window
 			$("#lizzieFreakout").trigger('play');
+			window.close();
 			//try modal images for pop-up walkers
 		}
 	}
@@ -134,8 +135,15 @@ function isGuessCorrect(){
 function isGameComplete(){
 	if(words.length == 0){
 		//display winning img and audio
-		alert("You have saved them all!");
+		alert("That's great, you have saved them all!");
 		//try modal images for pop-up walkers
+		var playAgain = confirm("Do you want to play again? Hit 'OK' to play again, or 'Cancel' to exit the game.");
+		if (playAgain){
+			reset();
+		} else{
+			//if user doesn't want to play again, window closes
+			window.close();
+		}
 	}
 }
 
